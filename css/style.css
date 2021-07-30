@@ -1,0 +1,633 @@
+:root{
+    --primary-color: rgb(39, 45, 78);
+    --secondary-color: rgb(120, 84, 247);
+    --tetiary-color: rgb(51, 162, 243);
+    --gray: rgb(148, 162, 179);
+    --white: #fff;
+    --green: rgb(112, 194, 23);
+
+    --default-radius: 4px;
+    --image-radius: 10px;
+    --transit: all .5s ease-in-out;
+    --default-pad: 0 20px;
+}
+
+/* ************* RESETS ************** */
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    font-size: 100%;
+}
+
+body{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+a{
+    text-decoration: none;
+}
+
+button{
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+}
+
+button:focus{
+    outline: none;
+}
+
+ul li{
+    list-style: none;
+    display: inline-block;
+}
+
+/* Addons */
+
+.container{
+    width: 80%;
+    margin: 0 auto;
+    max-width: 992px;
+}
+
+@media (max-width: 425px){
+    .container{
+        width: 100%;
+        padding: var(--default-pad);
+    }
+}
+
+
+/* ***************** MAIN STYLES ******************* */
+
+#wrapper{
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(to bottom, rgb(229, 239, 255), rgb(255, 255, 255));
+    overflow-x: hidden;
+}
+
+/* ******************************** Header Section ********************************* */
+header{
+    width: 100%;
+    padding: 0 50px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    margin-bottom: 25px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    position: relative;
+}
+
+
+/* Header -> Logo part */
+header .logo{
+    width: 150px;
+    margin-right: 15px;
+}
+
+/* Header -> Navigation part */
+
+header nav{
+    flex: 1;
+    display: flex;
+    padding: 8px 0;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+nav ul{
+    display: flex;
+    align-items: center;
+}
+
+nav ul li{
+    margin: 0 5px;
+}
+
+nav ul li.active .nav-links{
+    color: var(--secondary-color);
+}
+
+.nav-links{
+    font-size: .8rem;
+    padding: 8px 10px;
+    color: var(--primary-color);
+    font-weight: 600;
+    transition: var(--transit);
+}
+
+.nav-links:hover{
+    color: var(--secondary-color);
+}
+
+
+/* Header -> Options part */
+.header-options{
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.header-options ul{
+    display: flex;
+    align-items: center;
+}
+
+.header-options ul li:last-of-type{
+    margin-left: 15px;
+}
+
+.header-option-link{
+    font-size: .8rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    color: var(--primary-color);
+    transition: var(--transit);
+}
+
+.header-option-link:hover{
+    color: var(--secondary-color);
+}
+
+.header-option-link.btn{
+    padding: 10px 8px;
+    color: var(--white);
+    background-color: var(--secondary-color);
+    border-radius: var(--default-radius);
+}
+
+.header-option-link.btn:hover{
+    background-color: var(--primary-color);
+}
+
+/* Header -> Mobile part */
+
+.header-mobile{
+    margin-left: 15px;
+    padding: 10px 0;
+
+    display: none;
+    align-items: center;
+}
+
+.header-mobile .burger{
+    display: inline-block;
+}
+
+/* Three Horizontal Burger Bars */
+
+.burger span{
+    width: 28px;
+    height: 3px;
+    border-radius: var(--default-radius);
+    background-color: var(--primary-color);
+    display: block;
+    margin: 4px 0;
+    transition: var(--transit);
+}
+
+.burger::after, 
+.burger::before{
+    content: '';
+    width: 28px;
+    height: 3px;
+    border-radius: var(--default-radius);
+    background-color: var(--primary-color);
+    position: relative;
+    display: block;
+    transition: var(--transit);
+}
+
+/* X shaped burger */
+.burger.cancel span{
+    opacity: 0;
+}
+
+.burger.cancel::after{
+    transform: translateY(-7.2px) rotate(45deg);
+    transition: var(--transit);
+}
+
+.burger.cancel::before{
+    transform: translateY(7.5px) rotate(-45deg);
+    transition: var(--transit);
+}
+
+/* Header -> Mobile Dropdown nav part */
+.mobile-dropdown{
+    position: absolute;
+    width: 95%;
+    top: 62px;
+    left: 50%;
+
+    display: flex;
+    align-items: center;
+    font-size: .85rem;
+    transition: var(--transit);
+    transform:  translateX(-50%) scaleY(0);
+    transform-origin: top;
+
+    background-color: var(--white);
+    padding: 15px 0;
+    padding-top: 0;
+    box-shadow: 0px 5px 8px rgba(50, 50, 50, .25);
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+}
+
+.mobile-dropdown.show{
+    transform: translateX(-50%) scaleY(1);
+    transition: var(--transit);
+}
+
+.mobile-dropdown ul{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+}
+
+.mobile-dropdown ul li{
+    display: block;
+}
+
+.mobile-dropdown ul li.active .dropdown-link{
+    border-left: 3px solid var(--secondary-color);
+    background-color: rgba(120, 84, 247, .2);
+    color: var(--secondary-color);
+}
+
+.dropdown-link{
+    color: var(--primary-color);
+    display: block;
+    padding: 10px 20px;
+    transition: var(--transit);
+}
+
+.dropdown-link:hover{
+    background-color: rgba(120, 84, 247, .2);
+    color: var(--secondary-color);
+}
+
+
+/* Header Responsiveness */
+@media (max-width: 768px) {
+    header nav{
+        display: none;
+    }
+
+    .header-options{
+        display: none;
+    }
+
+    .header-mobile{
+        display: flex;
+    }
+}
+
+@media (max-width: 425px) {
+    header{
+        padding: var(--default-pad);
+        padding-top: 12px;
+        padding-bottom: 12px;
+        background-color: rgba(255, 255, 255, .8);
+    }
+}
+
+/* ************************* End Of Header Section ************************** */
+
+/* *************************** Brand Section ********************************** */
+#brand-section{
+    padding: 70px 0;
+}
+
+.brand-display{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Brand -> Text part */
+.brand-text{
+    margin-bottom: 15px;
+}
+
+/* Brand -> Text part -> Texts */
+.jumbotron{
+    flex: 1 1 580px;
+    margin: 2rem 0;
+}
+
+.brand-text h1{
+    font-size: 3.55rem;
+    color: var(--primary-color);
+    padding: 10px 0;
+    margin-bottom: 10px;
+}
+
+.brand-text p{
+    color: var(--gray);
+    font-size: .8rem;
+}
+
+/* Brand -> Text part -> Buttons & Links */
+.brand-options{
+    display: flex;
+    align-items: center;
+    padding-top: 10px;
+}
+
+.brand-options .brand-links{
+    display: inline-block;
+    color: var(--tetiary-color);
+    text-transform: capitalize;
+    transition: var(--transit);
+    font-size: .8rem;
+    font-weight: 700;
+}
+
+.brand-options .brand-links:hover{
+    color: var(--secondary-color);
+}
+
+.brand-options .brand-links.btn{
+    padding: 15px 35px;
+    background-color: var(--secondary-color);
+    color: var(--white);
+    font-weight: 600;
+    border-radius: 25px;
+}
+
+.brand-options .divider{
+    display: inline-block;
+    margin: 0 8px;
+    color: var(--gray);
+    font-size: .8rem;
+}
+
+
+
+/* Brand -> Image part */
+.brand-images{
+    flex: 1 1 350px;
+    position: relative;
+}
+
+.brand-main-image{
+    width: 100%;
+    object-fit: contain;
+    transform: translateX(55px);
+    border-radius: var(--image-radius);
+}
+
+/* Brand -> Image part -> Floating Image */
+.floating-img{
+    width: 210px;
+    object-fit: contain;
+    border-radius: var(--image-radius);
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(-20px) translateY(-40px);
+    
+    opacity: .85;
+    background-color: #ccc;
+}
+
+/* Brand -> Image part -> Orange Circle */
+.orange-circle{
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    background-color: rgb(255, 186, 73);
+
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    opacity: .9;
+
+    transform: translateX(22px) translateY(-15px);
+}
+/* Brand -> Image part -> Sales Box */
+.sales{
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translateX(-10px) translateY(-22px);
+}
+
+.sales h4{
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    padding: 10px 30px;
+    font-weight: 600;
+    
+    background-color: var(--green);
+    color: var(--white);
+
+    border-radius: 20px;
+}
+
+/* Brand -> Image part -> Payment Box */
+.payment-box{
+    padding: 15px 10px;
+    background-color: var(--white);
+    border-radius: var(--image-radius);
+
+    display: flex;
+    flex-direction: column;
+
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    transform: translateX(30px) translateY(130px);
+
+    box-shadow: 0px 10px 35px rgba(120, 84, 247, .15);
+}
+
+.payment-row{
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    border-bottom: 1px solid rgba(51, 162, 243, .3);
+}
+
+.payment-row:nth-child(3){
+    border-bottom: none;
+}
+
+.payment-img{
+    width: 80px;
+    display: flex;
+    align-items: center;
+    margin-right: 15px;
+}
+
+.payment-img img{
+    width: 100%;
+    object-fit: contain;
+}
+
+.payment-text{
+    flex: 1;
+    padding: 0 1.3rem;
+    display: flex;
+    align-items: center;
+}
+
+.payment-text p{
+    width: 100%;
+    font-size: .65rem;
+    color: var(--gray);
+}
+
+/* Switch */
+.payment-switch{
+    margin-left: 15px;
+    display: flex;
+    align-items: center;
+}
+
+.switch{
+    width: 40px;
+    padding: 3px;
+    border-radius: 20px;
+    transition: var(--transit);
+
+    cursor: pointer;
+}
+
+.switch-thumb{
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    position: relative;
+    transition: var(--transit);
+}
+
+/* Switch ON */
+
+.switch.off{
+    background-color: rgba(120, 84, 247, .2);
+    transition: var(--transit);
+}
+
+.switch.off .switch-thumb{
+    background-color: var(--secondary-color);
+    transition: var(--transit);
+}
+
+/* Switch OFF */
+.switch.on{
+    background-color: var(--green);
+    transition: var(--transit);
+}
+
+.switch.on .switch-thumb{
+    background-color: var(--white);
+    transform: translateX(21px);
+    transition: var(--transit);
+}
+
+
+@media (max-width: 768px) {
+    .brand-main-image{
+        transform: translateX(0px);
+    }
+
+    .jumbotron, .brand-images{
+        margin: 2rem 0;
+    }
+}
+
+@media (max-width: 425px){
+    #brand-section{
+        padding-top: 35px;
+    }
+
+    .brand-options{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+
+/* ******************** Card Section ***************** */
+#card-section{
+    width: 100%;
+    padding: 5rem 0;
+}
+
+.card-title{
+    width: 100%;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+.card-title h1{
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--primary-color);
+}
+
+.card-container{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 15px 0;
+}
+
+.card{
+    flex: 300px;
+    margin: 15px 12px;
+}
+
+.card-img{
+    width: 100%;
+    background-color: transparent;
+}
+
+.card-img img{
+    border-radius: var(--image-radius);
+    width: 100%;
+    object-fit: contain;
+    box-shadow: 0px 15px 30px rgba(51, 162, 243, .15);
+
+    background-color: transparent;
+}
+
+.card-body{
+    margin-top: 30px;
+    padding: 10px 0;
+}
+
+.card-body h3{
+    color: var(--primary-color);
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+}
+
+.card-body p{
+    color: var(--gray);
+    font-size: .8rem;
+    margin-bottom: 30px;
+}
+
+.card-link a{
+    color: var(--tetiary-color);
+    font-size: .8rem;
+    font-weight: 700;
+}
